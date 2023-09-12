@@ -82,6 +82,10 @@ const useHealthData = () => {
     // initialize the client
     const isInitialized = await initialize();
   
+    if(!isInitialized) {
+      return
+    }
+
     // request permissions
     const grantedPermissions = await requestPermission([
       { accessType: 'read', recordType: 'Steps' },
@@ -95,7 +99,7 @@ const useHealthData = () => {
         console.log('Granted permissions ', { permissions });
       });
     };
-    
+  
   
     const stepsCount = await readRecords('Steps', {
       timeRangeFilter: {
