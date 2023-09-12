@@ -9,7 +9,9 @@ import {
 
 const permissions = {
     permissions: {
-      read: [AppleHealthKit.Constants.Permissions.Steps, AppleHealthKit.Constants.Permissions.DistanceWalkingRunning],
+      read: [
+        AppleHealthKit.Constants.Permissions.Steps,
+        AppleHealthKit.Constants.Permissions.DistanceWalkingRunning],
       write: []
     },
   } 
@@ -82,19 +84,39 @@ const useHealthData = () => {
   
     // request permissions
     const grantedPermissions = await requestPermission([
-      { accessType: 'read', recordType: 'ActiveCaloriesBurned' },
+      { accessType: 'read', recordType: 'Steps' },
+      { accessType: 'read', recordType: 'Distance' },
+      //{ accessType: 'read', recordType: 'FloorsClimbed' },
     ]);
   
     // check if granted
+    const readGrantedPermissions = () => {
+      grantedPermissions().then((permissions) => {
+        console.log('Granted permissions ', { permissions });
+      });
+    };
+    
   
-    const result = await readRecords('ActiveCaloriesBurned', {
+    const stepsCount = await readRecords('Steps', {
       timeRangeFilter: {
         operator: 'between',
-        startTime: '2023-01-09T12:00:00.405Z',
-        endTime: '2023-01-09T23:53:15.405Z',
+        startTime: '2023-09-11T12:00:00.405Z',
+        endTime: '2023-09-12T23:53:15.405Z',
       },
     });
-    console.log(result)
+    //console.log(stepsCount)
+    const totalSteps = stepsCount.reduce((sum, cur) => sum + cur.count, 0)
+    setSteps(totalSteps)
+    
+    const distanceValue = await readRecords('Distance', {
+      timeRangeFilter: {
+        operator: 'between',
+        startTime: '2023-09-09T12:00:00.405Z',
+        endTime: '2023-09-12T23:53:15.405Z',
+      },
+    });
+    const totalDistance = distanceValue.reduce((sum, cur) => sum + cur.distance.inMeters, 0)
+    setDistance(totalDistance)
   }
 
   useEffect(() => {
