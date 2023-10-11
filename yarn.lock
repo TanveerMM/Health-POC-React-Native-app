@@ -8445,7 +8445,7 @@ react-native-health-connect@^1.2.0:
   resolved "https://registry.npmjs.org/react-native-health-connect/-/react-native-health-connect-1.2.0.tgz"
   integrity sha512-A8JJ85z4OY37Lrwe7Xoy+w3MYVz9nLNkuRpH+SE9L50TAPDb2Y24edJuvEP/O6uNRSpiz0L7dSxdJNMKRapu3g==
 
-react-native-health@^1.17.0:
+react-native-health@^1.18.0:
   version "1.18.0"
   resolved "https://registry.npmjs.org/react-native-health/-/react-native-health-1.18.0.tgz"
   integrity sha512-4CVLyBGrd6s/yPyb2/veZA0OobRP3SZ96eBZ2DunJr/1ZF3lKX3AuFFvGbCRNkycndni4VRr9T4b0MLqhXG+Hg==

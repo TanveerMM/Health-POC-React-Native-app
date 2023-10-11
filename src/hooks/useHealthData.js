@@ -27,12 +27,12 @@ const useHealthData = () => {
         return
     }
     
-    AppleHealthKit.isAvailable((error, isAvailable) => {
-        if(error) {
+    AppleHealthKit.isAvailable((err, available) => {
+        if(err) {
             console.log('Error checking availability')
             return
         }
-        if(!isAvailable) {
+        if(!available) {
             console.log('Apple Health not available')
             return
         }
@@ -43,8 +43,8 @@ const useHealthData = () => {
             }
             setHasPermissions(true)
           })
-        }, [])
-    })
+        })
+    },[])
    
 
   useEffect(() => {
